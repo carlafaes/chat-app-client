@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { Formik } from 'formik';
+import { Formik,ErrorMessage } from 'formik';
 
 // import InputGroup from 'react-bootstrap/InputGroup';
 // import Col from 'react-bootstrap/Col';
@@ -64,6 +64,7 @@ export default function Register() {
                     errors,
                     touched }) => (
                     <Form onSubmit={handleSubmit}>
+                        <Form.Label>Email</Form.Label>
                         <Form.Control
                             name="username"
                             onChange={handleChange}
@@ -77,7 +78,7 @@ export default function Register() {
                         <Form.Group
                             className="mb-3"
                             controlId="formBasicEmail">
-                            <Form.Label>Email address</Form.Label>
+                            <Form.Label>Email</Form.Label>
                             <Form.Control
                                 name="email"
                                 type="email"
