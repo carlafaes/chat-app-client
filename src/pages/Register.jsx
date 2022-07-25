@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import Button from 'react-bootstrap/Button';
+import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
-import { Formik,ErrorMessage } from 'formik';
+import { Formik, ErrorMessage } from 'formik';
+import { Link } from 'react-router-dom';
 
 // import InputGroup from 'react-bootstrap/InputGroup';
-// import Col from 'react-bootstrap/Col';
+import Col from 'react-bootstrap/Col';
 
 
 export default function Register() {
@@ -34,7 +36,7 @@ export default function Register() {
         return errors;
     }
 
-   
+
 
     return (
         <div>
@@ -47,13 +49,13 @@ export default function Register() {
                     password2: ''
                 }}
                 validate={validations}
-               
+
                 onSubmit={(values, { setSubmitting }) => {
                     setTimeout(() => {
-                      console.log(JSON.stringify(values, null, 2));
-                      setSubmitting(false);
+                        console.log(JSON.stringify(values, null, 2));
+                        setSubmitting(false);
                     }, 400);
-                  }}
+                }}
             >
 
                 {({
@@ -63,34 +65,48 @@ export default function Register() {
                     values,
                     errors,
                     touched }) => (
-                    <Form onSubmit={handleSubmit}>
-                        <Form.Label>Email</Form.Label>
-                        <Form.Control
-                            name="username"
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            value={values.username}
-                            placeholder="Username"
-                            aria-label="Username"
-                            aria-describedby="basic-addon1"
-                        />
+                    <Form as={ Col } md='4' onSubmit={handleSubmit}>
+                        <FloatingLabel
+                            controlId="floatingInput"
+                            label="Username"
+                            className="mb-3"
+                        >
+                            <Form.Control
+                                name="username"
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                value={values.username}
+                                placeholder="Username"
+                                aria-label="Username"
+                                aria-describedby="basic-addon1"
+                            />
+                        </FloatingLabel>
                         {errors.username && touched.username && errors.username}
                         <Form.Group
                             className="mb-3"
                             controlId="formBasicEmail">
-                            <Form.Label>Email</Form.Label>
-                            <Form.Control
-                                name="email"
-                                type="email"
-                                placeholder="Enter email"
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                value={values.email} />
-                        </Form.Group>
+                            <FloatingLabel
+                                controlId="floatingInput"
+                                label="Email"
+                                className="mb-3"
+                            >
+                                <Form.Control
+                                    name="email"
+                                    type="email"
+                                    placeholder="Enter email"
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.email} />
+                            </FloatingLabel>
                         {errors.email && touched.email && errors.email}
+                        </Form.Group>
 
                         <Form.Group className="mb-3" controlId="formBasicPassword1">
-                            <Form.Label>Password</Form.Label>
+                        <FloatingLabel
+                                controlId="floatingInput"
+                                label="Password"
+                                className="mb-3"
+                            >
                             <Form.Control
                                 placeholder="Password"
                                 type="password"
@@ -98,11 +114,16 @@ export default function Register() {
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 value={values.password} />
+                                </FloatingLabel>
                             {errors.password && touched.password && errors.password}
                         </Form.Group>
 
                         <Form.Group className="mb-3" controlId="formBasicPassword2">
-                            <Form.Label>Repeat Password</Form.Label>
+                        <FloatingLabel
+                                controlId="floatingInput"
+                                label="Repeat Password"
+                                className="mb-3"
+                            >
                             <Form.Control
                                 type="password"
                                 placeholder="Password"
@@ -110,12 +131,17 @@ export default function Register() {
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 value={values.password2} />
+                                </FloatingLabel>
                             {errors.password2 && touched.password2 && errors.password2}
                         </Form.Group>
 
                         <Button variant="primary" type="submit">
                             Submit
                         </Button>
+                        <br/>
+                        <Form.Label>Already have an account?
+                            <Link to="/login">Login</Link>
+                        </Form.Label>
                     </Form>
                 )}
             </Formik>
