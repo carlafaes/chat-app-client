@@ -40,6 +40,7 @@ export default function Register() {
 
     return (
         <div>
+            <center>
             <h1>Registro</h1>
             <Formik
                 initialValues={{
@@ -67,7 +68,7 @@ export default function Register() {
                     touched }) => (
                     <Form as={ Col } md='4' onSubmit={handleSubmit}>
                         <FloatingLabel
-                            controlId="floatingInput"
+                            controlId="floatingInputUsername"
                             label="Username"
                             className="mb-3"
                         >
@@ -86,7 +87,7 @@ export default function Register() {
                             className="mb-3"
                             controlId="formBasicEmail">
                             <FloatingLabel
-                                controlId="floatingInput"
+                                controlId="floatingInputEmail"
                                 label="Email"
                                 className="mb-3"
                             >
@@ -103,7 +104,7 @@ export default function Register() {
 
                         <Form.Group className="mb-3" controlId="formBasicPassword1">
                         <FloatingLabel
-                                controlId="floatingInput"
+                                controlId="floatingInputPassword"
                                 label="Password"
                                 className="mb-3"
                             >
@@ -120,7 +121,7 @@ export default function Register() {
 
                         <Form.Group className="mb-3" controlId="formBasicPassword2">
                         <FloatingLabel
-                                controlId="floatingInput"
+                                controlId="floatingInputPassword2"
                                 label="Repeat Password"
                                 className="mb-3"
                             >
@@ -145,6 +146,7 @@ export default function Register() {
                     </Form>
                 )}
             </Formik>
+            </center>
         </div>
     )
 }
