@@ -34,6 +34,8 @@ export default function Register() {
         return errors;
     }
 
+   
+
     return (
         <div>
             <h1>Registro</h1>
@@ -45,6 +47,13 @@ export default function Register() {
                     password2: ''
                 }}
                 validate={validations}
+               
+                onSubmit={(values, { setSubmitting }) => {
+                    setTimeout(() => {
+                      console.log(JSON.stringify(values, null, 2));
+                      setSubmitting(false);
+                    }, 400);
+                  }}
             >
 
                 {({
