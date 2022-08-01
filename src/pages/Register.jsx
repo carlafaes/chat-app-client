@@ -16,6 +16,30 @@ import Col from 'react-bootstrap/Col';
 export default function Register() {
     const [envio,setEnvio] = useState(false);
 
+    const message = () => {
+        toast.success('Message send succesfully!', {
+            position: "top-center",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+        });
+    }
+
+    const messageError = () => {
+        toast.error('Ups!something is wrong, please try again later', {
+            position: "top-center",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+        });
+    }
+
     const validations = (values) => {
         const errors = {};
         if (!values.email) {
@@ -43,10 +67,19 @@ export default function Register() {
 
 
     const handleSubmit = (values, { setSubmitting }) => {
-        setTimeout(() => {
-            console.log(JSON.stringify(values, null, 2));
+        try{
+            setTimeout(() => {
+                console.log(JSON.stringify(values, null, 2));
+                setEnvio(true);
+                message();
+                setSubmitting(false);
+            }, 100);
+        }
+        catch(error){
+            setEnvio(false);
+            messageError();
             setSubmitting(false);
-        }, 100);
+        }
     }
 
     return (
