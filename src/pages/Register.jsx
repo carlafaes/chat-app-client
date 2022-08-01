@@ -4,6 +4,8 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 import { Formik, ErrorMessage } from 'formik';
 import { Link } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 //style
 import s from '../utils/style/Register.module.css';
@@ -12,6 +14,7 @@ import Col from 'react-bootstrap/Col';
 
 
 export default function Register() {
+    const [envio,setEnvio] = useState(false);
 
     const validations = (values) => {
         const errors = {};
@@ -39,7 +42,12 @@ export default function Register() {
     }
 
 
-
+    const handleSubmit = (values, { setSubmitting }) => {
+        setTimeout(() => {
+            console.log(JSON.stringify(values, null, 2));
+            setSubmitting(false);
+        }, 100);
+    }
 
     return (
         <div>
@@ -54,12 +62,7 @@ export default function Register() {
                     }}
                     validate={validations}
 
-                    onSubmit={(values, { setSubmitting }) => {
-                        setTimeout(() => {
-                            console.log(JSON.stringify(values, null, 2));
-                            setSubmitting(false);
-                        }, 100);
-                    }}
+                    onSubmit={handleSubmit}
                 >
 
                     {({
