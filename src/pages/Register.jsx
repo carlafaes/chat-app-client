@@ -5,6 +5,8 @@ import Form from 'react-bootstrap/Form';
 import { Formik, ErrorMessage } from 'formik';
 import { Link } from 'react-router-dom';
 
+//style
+import s from '../utils/style/Register.module.css';
 // import InputGroup from 'react-bootstrap/InputGroup';
 import Col from 'react-bootstrap/Col';
 
@@ -38,114 +40,123 @@ export default function Register() {
 
 
 
+
     return (
         <div>
             <center>
-            <h1>Registro</h1>
-            <Formik
-                initialValues={{
-                    username: '',
-                    email: '',
-                    password: '',
-                    password2: ''
-                }}
-                validate={validations}
+                <h1>Registro</h1>
+                <Formik
+                    initialValues={{
+                        username: '',
+                        email: '',
+                        password: '',
+                        password2: ''
+                    }}
+                    validate={validations}
 
-                onSubmit={(values, { setSubmitting }) => {
-                    setTimeout(() => {
-                        console.log(JSON.stringify(values, null, 2));
-                        setSubmitting(false);
-                    }, 400);
-                }}
-            >
+                    onSubmit={(values, { setSubmitting }) => {
+                        setTimeout(() => {
+                            console.log(JSON.stringify(values, null, 2));
+                            setSubmitting(false);
+                        }, 100);
+                    }}
+                >
 
-                {({
-                    handleSubmit,
-                    handleChange,
-                    handleBlur,
-                    values,
-                    errors,
-                    touched }) => (
-                    <Form as={ Col } md='4' onSubmit={handleSubmit}>
-                        <FloatingLabel
-                            controlId="floatingInputUsername"
-                            label="Username"
-                            className="mb-3"
-                        >
-                            <Form.Control
-                                name="username"
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                value={values.username}
-                                placeholder="Username"
-                                aria-label="Username"
-                                aria-describedby="basic-addon1"
-                            />
-                        </FloatingLabel>
-                        {errors.username && touched.username && errors.username}
-                        <Form.Group
-                            className="mb-3"
-                            controlId="formBasicEmail">
+                    {({
+                        handleSubmit,
+                        handleChange,
+                        handleBlur,
+                        values,
+                        errors,
+                        touched }) => (
+                        <form onSubmit={handleSubmit}>
                             <FloatingLabel
-                                controlId="floatingInputEmail"
-                                label="Email"
+                                controlId="floatingInputUsername"
+                                label="Username"
                                 className="mb-3"
                             >
                                 <Form.Control
-                                    name="email"
-                                    type="email"
-                                    placeholder="Enter email"
+                                    name="username"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
-                                    value={values.email} />
+                                    value={values.username}
+                                    placeholder="Username"
+                                    aria-label="Username"
+                                    aria-describedby="basic-addon1"
+                                />
                             </FloatingLabel>
-                        {errors.email && touched.email && errors.email}
-                        </Form.Group>
-
-                        <Form.Group className="mb-3" controlId="formBasicPassword1">
-                        <FloatingLabel
-                                controlId="floatingInputPassword"
-                                label="Password"
+                            <p className={s.errors_msg}>
+                                {errors.username && touched.username && errors.username}
+                            </p>
+                            <Form.Group
                                 className="mb-3"
-                            >
-                            <Form.Control
-                                placeholder="Password"
-                                type="password"
-                                name="password"
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                value={values.password} />
+                                controlId="formBasicEmail">
+                                <FloatingLabel
+                                    controlId="floatingInputEmail"
+                                    label="Email"
+                                    className="mb-3"
+                                >
+                                    <Form.Control
+                                        name="email"
+                                        type="email"
+                                        placeholder="Enter email"
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        value={values.email} />
                                 </FloatingLabel>
-                            {errors.password && touched.password && errors.password}
-                        </Form.Group>
+                                <p className={s.errors_msg}>
+                                    {errors.email && touched.email && errors.email}
+                                </p>
+                            </Form.Group>
 
-                        <Form.Group className="mb-3" controlId="formBasicPassword2">
-                        <FloatingLabel
-                                controlId="floatingInputPassword2"
-                                label="Repeat Password"
-                                className="mb-3"
-                            >
-                            <Form.Control
-                                type="password"
-                                placeholder="Password"
-                                name="password2"
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                value={values.password2} />
+                            <Form.Group className="mb-3" controlId="formBasicPassword1">
+                                <FloatingLabel
+                                    controlId="floatingInputPassword"
+                                    label="Password"
+                                    className="mb-3"
+                                >
+                                    <Form.Control
+                                        placeholder="Password"
+                                        type="password"
+                                        name="password"
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        value={values.password} />
                                 </FloatingLabel>
-                            {errors.password2 && touched.password2 && errors.password2}
-                        </Form.Group>
+                                <p className={s.errors_msg}>
+                                    {errors.password && touched.password && errors.password}
+                                </p>
+                            </Form.Group>
 
-                        <Button variant="primary" type="submit">
-                            Submit
-                        </Button>
-                        <br/>
-                        <Form.Label>Already have an account?
-                            <Link to="/login">Login</Link>
-                        </Form.Label>
-                    </Form>
-                )}
-            </Formik>
+                            <Form.Group className="mb-3" controlId="formBasicPassword2">
+                                <FloatingLabel
+                                    controlId="floatingInputPassword2"
+                                    label="Repeat Password"
+                                    className="mb-3"
+                                >
+                                    <Form.Control
+                                        type="password"
+                                        placeholder="Password"
+                                        name="password2"
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        value={values.password2} />
+                                </FloatingLabel>
+                                <p className={s.errors_msg}>
+                                    {errors.password2 && touched.password2 && errors.password2}
+                                </p>
+                            </Form.Group>
+
+                            <Button variant="primary" type="submit">
+                                Submit
+                            </Button>
+                            <br />
+                            <Form.Label>Already have an account?
+                                <Link to="/login">Login</Link>
+                            </Form.Label>
+                        </form>
+                    )}
+                </Formik>
             </center>
         </div>
     )

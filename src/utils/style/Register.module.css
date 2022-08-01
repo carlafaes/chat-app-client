@@ -1,0 +1,9 @@
+.errors_msg{
+    color: red;
+    font-size: 12px;
+    background-color: thistle;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
