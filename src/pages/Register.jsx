@@ -194,6 +194,9 @@ export default function Register() {
                     )}
                 </Formik>
             </center>
+            <ToastContainer
+                theme='dark'
+            />
         </div>
     )
 }
