@@ -10,7 +10,7 @@ import axios from "axios";
 import { registerRoute } from "../utils/routes/APIRoutes";
 
 //utils
-import {messageError, message,toastOptions} from "../utils/messagesToast/messages";
+import { messageError, message, toastOptions } from "../utils/messagesToast/messages";
 
 //style
 import s from '../utils/style/Register.module.css';
@@ -19,10 +19,10 @@ import Col from 'react-bootstrap/Col';
 
 
 export default function Register() {
-    const [envio,setEnvio] = useState(false);
-    const navigate=useNavigate();
+    const [envio, setEnvio] = useState(false);
+    const navigate = useNavigate();
 
-    const toastOptions= {
+    const toastOptions = {
         position: "top-center",
         autoClose: 2000,
         hideProgressBar: false,
@@ -32,17 +32,17 @@ export default function Register() {
         progress: undefined,
     }
 
-    const message = () => {
-        toast.success('Registro exitoso!', {
-            position: "top-center",
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-        });
-    }
+    // const message = () => {
+    //     toast.success('Registro exitoso!', {
+    //         position: "top-center",
+    //         autoClose: 2000,
+    //         hideProgressBar: false,
+    //         closeOnClick: true,
+    //         pauseOnHover: true,
+    //         draggable: true,
+    //         progress: undefined,
+    //     });
+    // }
 
     const messageError = () => {
         toast.error('Algo ha salido mal! :(', {
@@ -59,48 +59,52 @@ export default function Register() {
     const validations = (values) => {
         const errors = {};
         if (!values.email) {
-            errors.email = 'Required';
+            errors.email = 'El correo electronico es requerido';
         } else if (
             !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
         ) {
-            errors.email = 'Invalid email address';
+            errors.email = 'Correo electronico invalido';
         }
 
         if (!values.username) {
-            errors.username = 'Required';
+            errors.username = 'El usuario de usuario es requerido';
         }
         if (!values.password) {
-            errors.password = 'Required';
+            errors.password = 'La contraseña es requerida';
         }
         else if (/(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/.test(values.password) === false) {
-            errors.password = 'Password must be at least 8 characters, contain at least one uppercase letter, one lowercase letter, one number and one special character';
+            errors.password = 'La contraseña debe tener al menos 8 caracteres, contener al menos una letra mayúscula, una letra minúscula, un número y un carácter especial';
         }
         if (values.password2 !== values.password) {
-            errors.password2 = 'Passwords must match';
+            errors.password2 = 'Las contraseñas no coinciden';
         }
         return errors;
     }
 
 
-    const handleSubmit = async(values, { setSubmitting }) => {
-        
+    const handleSubmit = async (values, { setSubmitting }) => {
+
+        try {
             const { data } = await axios.post(registerRoute, values);
             console.log(data);
-            if(data.status === false){
-                toast.error(data.message, toastOptions);
-                messageError()
-                setEnvio(false);
-                setSubmitting(false);
-            }
-            else{
+            if (data.status === true) {
+                console.log('funciono')
                 message();
                 setEnvio(true);
                 localStorage.setItem('token-chatapp-user', JSON.stringify(data.user));
                 setSubmitting(false);
                 navigate('/login');
             }
-                console.log(JSON.stringify(values, null, 2));
-                
+            if (data.status === false) {
+                toast.error(data.message, toastOptions);
+                setEnvio(false);
+            }
+        }
+        catch (err) {
+            console.log(err);
+            messageError()
+            setEnvio(false);
+        }
     }
 
     return (
