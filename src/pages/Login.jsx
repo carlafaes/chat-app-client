@@ -43,7 +43,7 @@ export default function Login() {
     const handleSubmit = async (values, { setSubmitting }) => {
 
         try {
-            const { data } = await axios.get(loginRoute, values);
+            const { data } = await axios.post(loginRoute, values);
             console.log(data);
             if (data.status === true) {
                 console.log('funciono')
