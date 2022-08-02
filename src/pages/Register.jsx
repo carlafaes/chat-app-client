@@ -3,11 +3,14 @@ import Button from 'react-bootstrap/Button';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 import { Formik, ErrorMessage } from 'formik';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios";
 import { registerRoute } from "../utils/routes/APIRoutes";
+
+//utils
+import {messageError, message,toastOptions} from "../utils/messagesToast/messages";
 
 //style
 import s from '../utils/style/Register.module.css';
@@ -17,9 +20,20 @@ import Col from 'react-bootstrap/Col';
 
 export default function Register() {
     const [envio,setEnvio] = useState(false);
+    const navigate=useNavigate();
+
+    const toastOptions= {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+    }
 
     const message = () => {
-        toast.success('Message send succesfully!', {
+        toast.success('Registro exitoso!', {
             position: "top-center",
             autoClose: 2000,
             hideProgressBar: false,
@@ -31,7 +45,7 @@ export default function Register() {
     }
 
     const messageError = () => {
-        toast.error('Ups!something is wrong, please try again later', {
+        toast.error('Algo ha salido mal! :(', {
             position: "top-center",
             autoClose: 2000,
             hideProgressBar: false,
@@ -69,19 +83,24 @@ export default function Register() {
 
 
     const handleSubmit = async(values, { setSubmitting }) => {
-        try{
+        
             const { data } = await axios.post(registerRoute, values);
-                console.log(JSON.stringify(values, null, 2));
-                setEnvio(true);
-                message();
+            console.log(data);
+            if(data.status === false){
+                toast.error(data.message, toastOptions);
+                messageError()
+                setEnvio(false);
                 setSubmitting(false);
-            
-        }
-        catch(error){
-            setEnvio(false);
-            messageError();
-            setSubmitting(false);
-        }
+            }
+            else{
+                message();
+                setEnvio(true);
+                localStorage.setItem('token-chatapp-user', JSON.stringify(data.user));
+                setSubmitting(false);
+                navigate('/login');
+            }
+                console.log(JSON.stringify(values, null, 2));
+                
     }
 
     return (
