@@ -1,9 +1,16 @@
 .errors_msg{
     color: red;
-    font-size: 12px;
-    background-color: thistle;
+    font-size: 13px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    background-color: transparent;
     height: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.container{
+    background-color: lightblue;
+    height: 100vh;
+    padding: 3%;
 }

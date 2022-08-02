@@ -14,47 +14,14 @@ import { messageError, message, toastOptions } from "../utils/messagesToast/mess
 
 //style
 import s from '../utils/style/Register.module.css';
-// import InputGroup from 'react-bootstrap/InputGroup';
-import Col from 'react-bootstrap/Col';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
 
 
 export default function Register() {
     const [envio, setEnvio] = useState(false);
     const navigate = useNavigate();
-
-    const toastOptions = {
-        position: "top-center",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-    }
-
-    // const message = () => {
-    //     toast.success('Registro exitoso!', {
-    //         position: "top-center",
-    //         autoClose: 2000,
-    //         hideProgressBar: false,
-    //         closeOnClick: true,
-    //         pauseOnHover: true,
-    //         draggable: true,
-    //         progress: undefined,
-    //     });
-    // }
-
-    const messageError = () => {
-        toast.error('Algo ha salido mal! :(', {
-            position: "top-center",
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-        });
-    }
 
     const validations = (values) => {
         const errors = {};
@@ -108,8 +75,11 @@ export default function Register() {
     }
 
     return (
-        <div>
+        <div className={s.container}>
             <center>
+            <Card sx={{minWidth:275, maxWidth:1200}}>
+                <CardContent>
+
                 <h1>Registro</h1>
                 <Formik
                     initialValues={{
@@ -218,6 +188,8 @@ export default function Register() {
                         </form>
                     )}
                 </Formik>
+                </CardContent>
+            </Card>
             </center>
             <ToastContainer
                 theme='dark'
