@@ -6,6 +6,8 @@ import { Formik, ErrorMessage } from 'formik';
 import { Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import axios from "axios";
+import { registerRoute } from "../utils/routes/APIRoutes";
 
 //style
 import s from '../utils/style/Register.module.css';
@@ -66,14 +68,14 @@ export default function Register() {
     }
 
 
-    const handleSubmit = (values, { setSubmitting }) => {
+    const handleSubmit = async(values, { setSubmitting }) => {
         try{
-            setTimeout(() => {
+            const { data } = await axios.post(registerRoute, values);
                 console.log(JSON.stringify(values, null, 2));
                 setEnvio(true);
                 message();
                 setSubmitting(false);
-            }, 100);
+            
         }
         catch(error){
             setEnvio(false);
