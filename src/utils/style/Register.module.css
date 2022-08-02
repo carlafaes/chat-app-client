@@ -12,5 +12,7 @@
 .container{
     background-color: lightblue;
     height: 100vh;
-    padding: 3%;
+    min-height: max-content;
+    min-width: max-content;
+    padding: 5%;
 }

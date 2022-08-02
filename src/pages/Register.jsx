@@ -77,7 +77,7 @@ export default function Register() {
     return (
         <div className={s.container}>
             <center>
-            <Card sx={{minWidth:275, maxWidth:1200}}>
+            <Card sx={{minWidth:275, maxWidth:900}}>
                 <CardContent>
 
                 <h1>Registro</h1>
@@ -182,8 +182,8 @@ export default function Register() {
                                 Submit
                             </Button>
                             <br />
-                            <Form.Label>Already have an account?
-                                <Link to="/login">Login</Link>
+                            <Form.Label>Ya tienes una cuenta?
+                                <Link to="/login">Inicia sesion</Link>
                             </Form.Label>
                         </form>
                     )}
