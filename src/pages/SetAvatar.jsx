@@ -27,7 +27,7 @@ export default function SetAvatar() {
             data.push(base64);
             setAvatar(data);
             i++;
-        } while (i < 5); 
+        } while (i < 5); ;
     }
     
     useEffect(()=>{
@@ -37,6 +37,19 @@ export default function SetAvatar() {
   return(
     <div className="container">
         <p>Elige tu avatar</p>
+        <div>
+            {avatar.length > 1 ? 
+            avatar.map((avatar, index)=>{
+                return(
+                    <div key={index}>
+                        <img src={`data:image/svg+xml;base64,${avatar}`} alt="avatar" onClick={()=>{setAvatarSelected(avatar)}}/>
+                    </div>
+                )
+                
+            })
+        :
+        <p>loading</p>}
+        </div>
     </div>
   );
 }
