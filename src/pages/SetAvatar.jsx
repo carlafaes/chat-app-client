@@ -45,12 +45,10 @@ export default function SetAvatar() {
             const { data } = await axios.post(`${setAvatarRoute}/${user._id}`,{
                 image: setAvatarSelected(avatarSelected),
             })
-            console.log(data,'data avatar[selected]')
             if(data.isSet){
                 user.isAvatarImageSet= true;
                 user.avatarImage = data.image;
                 localStorage.setItem('token-chatapp-user', JSON.stringify(user))
-                console.log(data,'data',user,':user')
                 toast.success('Avatar cambiado con exito', toastOptions)
                 navigate('/');
 
