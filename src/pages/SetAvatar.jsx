@@ -42,14 +42,17 @@ export default function SetAvatar() {
             {avatar.length > 1 ? 
             avatar.map((avatar, index)=>{
                 return(
-                    <div key={index}>
-                        <img src={`data:image/svg+xml;base64,${avatar}`} alt="avatar" onClick={()=>{setAvatarSelected(avatar)}}/>
+                    <div key={index} className={`avatar ${avatarSelected === index ? "slected" : ""}`}>
+                        <img src={`data:image/svg+xml;base64,${avatar}`} alt="avatar" onClick={()=>{setAvatarSelected(avatar)}} width='50' height='50'/>
                     </div>
                 )
                 
             })
         :
         <p>loading</p>}
+        </div>
+        <div>
+            <button>Establecer avatar</button>
         </div>
     </div>
   );
