@@ -25,8 +25,9 @@ export default function Login() {
     useEffect(() => {
         if(localStorage.getItem('token-chatapp-user')){
             navigate('/');
+            
         }
-    }, []);
+    },[]);
 
     const validations = (values) => {
         const errors = {};

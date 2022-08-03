@@ -40,8 +40,33 @@ export default function SetAvatar() {
         if (avatarSelected === undefined) {
             toast.error('Primero tienes que seleccionar un avatar', toastOptions)
         }
-    }
+        else{
+            const user= await JSON.parse(localStorage.getItem('token-chatapp-user'));
+            const { data } = await axios.post(`${setAvatarRoute}/${user._id}`,{
+                image: setAvatarSelected(avatarSelected),
+            })
+            console.log(data,'data avatar[selected]')
+            if(data.isSet){
+                user.isAvatarImageSet= true;
+                user.avatarImage = data.image;
+                localStorage.setItem('token-chatapp-user', JSON.stringify(user))
+                console.log(data,'data',user,':user')
+                toast.success('Avatar cambiado con exito', toastOptions)
+                navigate('/');
 
+            }
+            else{
+                toast.error("Ha ocurrido un error. Por favor, intenta nuevamente.")
+            }
+            
+
+        }
+    }
+    useEffect( () => {
+        if(!localStorage.getItem('token-chatapp-user')){
+            navigate('/login');
+        }
+    },[])
     useEffect(() => {
         getInfoAv();
 
@@ -60,8 +85,12 @@ export default function SetAvatar() {
                         {avatar.length > 1 &&
                             avatar.map((avatar, index) => {
                                 return (
-                                    <div key={index} className={`avatar ${avatarSelected === index ? "slected" : ""}`}>
-                                        <img src={`data:image/svg+xml;base64,${avatar}`} alt="avatar" onClick={() => { setAvatarSelected(avatar) }} width='50' height='50' />
+                                    <div key={index} className={`avatar ${avatarSelected === index ? "selected" : ""}`}>
+                                        <img 
+                                        src={`data:image/svg+xml;base64,${avatar}`} alt="avatar" 
+                                        onClick={() => { setAvatarSelected(index) }} width='50' 
+                                        height='50'
+                                        key={avatar} />
                                     </div>
                                 )
 
