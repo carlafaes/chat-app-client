@@ -12,6 +12,7 @@ export default function SetAvatar() {
     const navigate= useNavigate();
     const [avatar, setAvatar]= useState([]);
     const [avatarSelected, setAvatarSelected]= useState(undefined);
+    console.log(avatarSelected,'avatar elegido');
     const [loading, setLoading] = useState(false);
 
     console.log(avatar,'data avatar');
@@ -21,7 +22,7 @@ export default function SetAvatar() {
         console.log(data,'data');
         let i=0;
         do {
-            const image=  await axios.get(api);
+            const image=  await axios.get(`${api}/${Math.round(Math.random()*100)}`);
             const buffer= new Buffer(image.data); //convertir la imagen a buffer
             const base64= buffer.toString('base64');//convertir el buffer a base64
             data.push(base64);
