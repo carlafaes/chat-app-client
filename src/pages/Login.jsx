@@ -24,8 +24,11 @@ export default function Login() {
 
     useEffect(() => {
         if(localStorage.getItem('token-chatapp-user')){
-            navigate('/');
+            navigate('/setAvatar');
             
+        }
+        else{
+            navigate('/login');
         }
     },[]);
 
@@ -58,7 +61,7 @@ export default function Login() {
                 setEnvio(true);
                 localStorage.setItem('token-chatapp-user', JSON.stringify(data.user));
                 setSubmitting(false);
-                navigate('/');
+                navigate('/setAvatar');
             }
             if (data.status === false) {
                 toast.error(data.message, toastOptions);

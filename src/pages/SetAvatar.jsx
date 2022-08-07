@@ -16,25 +16,26 @@ export default function SetAvatar() {
     const navigate = useNavigate();
     const [avatar, setAvatar] = useState([]);
     const [avatarSelected, setAvatarSelected] = useState(undefined);
-    console.log(avatarSelected, 'avatar elegido');
     const [loading, setLoading] = useState(true);
-
-    console.log(avatar, 'data avatar');
-
+    
+    
     const getInfoAv = async () => {
         const data = [];
-        console.log(data, 'data');
         let i = 0;
         do {
             const image = await axios.get(`${api}/${Math.round(Math.random() * 100)}`);
             const buffer = new Buffer(image.data); //convertir la imagen a buffer
             const base64 = buffer.toString('base64');//convertir el buffer a base64
-            data.push(base64);
+            // console.log(base64,'image');
+           data.push(base64);
             setAvatar(data);
             i++;
         } while (i < 4);
         setLoading(false);
+        console.log(data, 'data getInfoAv');
     }
+    //console.log(avatar, 'data avatar');
+    console.log(avatarSelected, 'avatar elegido');
 
     const setProfilePicture = async () => {
         if (avatarSelected === undefined) {
@@ -43,15 +44,17 @@ export default function SetAvatar() {
         else{
             const user= await JSON.parse(localStorage.getItem('token-chatapp-user'));
             const { data } = await axios.post(`${setAvatarRoute}/${user._id}`,{
-                image: setAvatarSelected(avatarSelected),
+                image: avatar[avatarSelected],
             })
+            console.log(data, 'data setProfilePicture');
             if(data.isSet){
                 user.isAvatarImageSet= true;
                 user.avatarImage = data.image;
                 localStorage.setItem('token-chatapp-user', JSON.stringify(user))
                 toast.success('Avatar cambiado con exito', toastOptions)
-                navigate('/');
-
+                 navigate('/');
+                //console.log(user, 'user');
+                //console.log(data, 'data.image');
             }
             else{
                 toast.error("Ha ocurrido un error. Por favor, intenta nuevamente.")

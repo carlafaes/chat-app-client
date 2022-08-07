@@ -64,7 +64,7 @@ export default function Register() {
                 console.log('funciono')
                 message();
                 setEnvio(true);
-                localStorage.setItem('token-chatapp-user', JSON.stringify(data.user));
+                localStorage.setItem('token-chatapp-user','avatar', JSON.stringify(data.user));
                 setSubmitting(false);
                 navigate('/login');
             }
