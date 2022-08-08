@@ -16,21 +16,22 @@ export default function Contact({ contacts, changeChat,currentUser }) {
         if(data){
             setCurrentUserName(data.username);
             setCurrentUserImage(data.avatarImage);
-            currentInfoUser()
+            //currentInfoUser()
         }
         
      },[currentUser])
-    async function currentInfoUser(data){
-        let dataInfo=data
-        if(dataInfo){
-            setCurrentUserImage( await dataInfo.avatarImage);
-            setCurrentUserName(await dataInfo.username);
-        }
-        else{
-            setCurrentUserImage("");
-            setCurrentUserName("");
-        }
-    }
+    // async function currentInfoUser(data){
+    //     let dataInfo=data
+    //     console.log(dataInfo,'dataInfo')
+    //     if(dataInfo){
+    //         setCurrentUserImage( await dataInfo.avatarImage);
+    //         setCurrentUserName(await dataInfo.username);
+    //     }
+    //     else{
+    //         setCurrentUserImage("");
+    //         setCurrentUserName("");
+    //     }
+    // }
 
     const changeCurrentChat = (index, contact) => {
         setCurrentSelected(index);
@@ -38,7 +39,7 @@ export default function Contact({ contacts, changeChat,currentUser }) {
     };
      console.log(currentSelected,'currentSelected Contact')
      console.log(currentUserName,'currentUserName  Contact')
-     console.log({currentUserImage},'currentUserImage  Contact')
+     console.log(currentUserImage,'currentUserImage  Contact')
 
     return (
         <>
@@ -56,6 +57,8 @@ export default function Contact({ contacts, changeChat,currentUser }) {
                                     <img
                                         src={`data:image/svg+xml;base64,${contact.avatarImage}`}
                                         alt="avatar"
+                                        width='50'
+                                        height='50'
                                     /> 
                                 </div>
                                 <div>
