@@ -1,11 +1,17 @@
 import React from "react";
+import axios from "axios";
+
+//route
+import { sendMessageRoute } from "../utils/routes/APIRoutes";
+
+//components
 import ChatInput from "./ChatInput";
 import Logout from "./Logout";
 
 export default function ChatContainer({ currentUser,currentChat }) {
 
     const handleSendMsg=(msg)=>{
-        
+
     }
 
   return (
