@@ -5,13 +5,16 @@ import { allUsersRoute } from '../utils/routes/APIRoutes';
 
 //components
 import Contact from '../components/Contact';
+import Welcome from '../components/Welcome';
+import ChatContainer from '../components/ChatContainer';
 
 export default function Chat() {
 const navigate=useNavigate();
 const [contacts, setContacts]= useState([]);
 const [currentUser, setCurrentUser]= useState
 (undefined);
-const [currenChat,setCurrentChat]=useState(undefined);
+const [currentChat,setCurrentChat]=useState(undefined);
+console.log(currentChat,'currenChat')
 
 useEffect( () => {
     async function getInfoUser(){
@@ -39,11 +42,11 @@ useEffect( () => {
     fetchData();
 }, [currentUser]);
 
-console.log(currentUser,'currentUser')
+//console.log(currentUser,'currentUser')
 console.log(contacts,'contacts');
 
-const handleChatChange=(currenChat)=>{
-    setCurrentChat(currenChat);
+const handleChatChange=(currentChat)=>{
+    setCurrentChat(currentChat);
 }
 //console.log(currenChat,'chat')
     return(
@@ -53,6 +56,11 @@ const handleChatChange=(currenChat)=>{
             contacts={contacts} 
             currentUser={currentUser}
             changeChat={handleChatChange}/>
+            {currentChat === undefined ?
+            <Welcome currentUser={currentUser}/>
+            :
+            <ChatContainer  currentUser={currentUser} currentChat={currentChat}/>
+            }
         </div>
     )
 }
