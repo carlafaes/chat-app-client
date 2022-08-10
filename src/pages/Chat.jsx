@@ -76,9 +76,14 @@ const handleChatChange=(currentChat)=>{
             currentUser={currentUser}
             changeChat={handleChatChange}/>
             {currentChat === undefined ?
-            <Welcome currentUser={currentUser}/>
+            <Welcome 
+            currentUser={currentUser}
+            />
             :
-            <ChatContainer  currentUser={currentUser} currentChat={currentChat} socket={socket}/>
+            <ChatContainer  
+            currentUser={currentUser} currentChat={currentChat} 
+            socket={socket}
+            />
             }
         </div>
     )

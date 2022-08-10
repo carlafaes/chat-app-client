@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useRef } from "react";
 import axios from "axios";
 
 //route
@@ -12,8 +12,10 @@ import Logout from "./Logout";
 import s from '../styles/chatContainer.module.css';
 
 
-export default function ChatContainer({ currentUser, currentChat }) {
+export default function ChatContainer({ currentUser, currentChat, socket }) {
     const [messages, setMessages] = useState([]);
+    const [arrivalMessage, setArrivalMessage] = useState(null);
+    const scrollRef=useRef();
 
 
     useEffect(() => {
@@ -41,8 +43,39 @@ export default function ChatContainer({ currentUser, currentChat }) {
             to: currentChat._id,
             message: msg
         })
+        socket.current.emit('send-msg', {
+            to: currentChat._id,
+            from:currentUser._id,
+            message: msg,
+        })
+
+        const msgs= [...messages];
+        msgs.push({
+            fromSelf: true, 
+            message:msg
+        });
+        setMessages(msgs);
         console.log(msg, 'message')
     }
+
+    useEffect(() => {
+        if(socket.current){
+            socket.current.on('msg-recieve', (msg)=>{
+                setArrivalMessage({
+                    fromSelf: false,
+                    message: msg
+                }) //set the message to be displayed
+            })
+        }
+    } ,[])
+
+    useEffect(() => {
+        arrivalMessage && setMessages((prev) => [...prev, arrivalMessage])
+    } ,[arrivalMessage])
+
+    useEffect(() => {
+        scrollRef.current?.scrollIntoView({ behavior: 'smooth' }); //scroll to bottom
+    } ,[messages])
 
     return (
         <div>
@@ -56,7 +89,7 @@ export default function ChatContainer({ currentUser, currentChat }) {
                     <div>
                         {messages && messages.map((msg, index) => {
                             return (
-                                <div key={index} className={`message ${msg.fromSelf ? s.sended : s.recieved}`}>
+                                <div ref={scrollRef} key={index} className={`message ${msg.fromSelf ? s.sended : s.recieved}`}>
                                     <p>
                                         {/* {msg.from === currentUser._id ? "You" : currentChat.username} */}
                                         {msg.message}
