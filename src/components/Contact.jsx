@@ -43,9 +43,9 @@ export default function Contact({ contacts, changeChat,currentUser }) {
 
     return (
         <>
-            <h1 className="text-3xl font-bold underline">Contact</h1>
+            <h1 className="text-3xl font-bold ">Contact</h1>
             {currentUserImage && (
-                <div>
+                <div p-6 max-w-sm mx-auto bg-white rounded-xl shadow-lg flex items-center space-x-4>
                     {contacts && contacts.map((contact, index) => {
                         return (
                             <div

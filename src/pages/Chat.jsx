@@ -71,15 +71,15 @@ const handleChatChange=(currentChat)=>{
     return(
         <div>
             <h1>Chat</h1>
-            <div className='grid grid-cols-2'>
-            <div>      
+            <div className='grid grid-cols-1 md:grid-cols-2 gap-4 my-4'>
+            <div className='bg-violet-400'>      
             <Contact 
             contacts={contacts} 
             currentUser={currentUser}
             changeChat={handleChatChange}/>
             </div>
 
-            <div>
+            <div className='bg-gray-400'>
             {currentChat === undefined ?
             
             <Welcome 
