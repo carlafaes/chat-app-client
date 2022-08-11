@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Welcome({ currentUser }) {
     return (
-        <div container mx-auto mt-5 text-center>
+        <div className="container mx-auto mt-5 text-center">
             {currentUser && (
                 <div>
                     <h1>Welcome {currentUser.username}</h1>

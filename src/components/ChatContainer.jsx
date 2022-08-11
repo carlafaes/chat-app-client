@@ -78,7 +78,7 @@ export default function ChatContainer({ currentUser, currentChat, socket }) {
     } ,[messages])
 
     return (
-        <div>
+        <div className="flex justify-center text-center px-12">
             <h1>Chat</h1>
             {currentChat && (
                 <div>
@@ -91,7 +91,6 @@ export default function ChatContainer({ currentUser, currentChat, socket }) {
                             return (
                                 <div ref={scrollRef} key={index} className={`message ${msg.fromSelf ? s.sended : s.recieved}`}>
                                     <p>
-                                        {/* {msg.from === currentUser._id ? "You" : currentChat.username} */}
                                         {msg.message}
                                     </p>
                                 </div>

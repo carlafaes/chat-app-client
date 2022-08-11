@@ -1,0 +1,23 @@
+.selected{
+    background-color: #070b29;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+    max-width: 100%;
+    word-wrap: break-word;
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+}
+.chat{
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+    max-width: 100%;
+    word-wrap: break-word;
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+
+}

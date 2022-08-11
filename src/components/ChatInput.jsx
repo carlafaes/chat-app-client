@@ -24,12 +24,12 @@ export default function ChatInput({ handleSendMsg }) {
         }
     }
     return(
-        <div>
+        <div className="flex justify-center bg-cyan-300">
             <div className="emoji-picker">
             </div>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} >
 
-                <button onClick={handleEmojiPicker}>
+                <button onClick={handleEmojiPicker} className="all-margin-1">
                     Emoji
                     {showEmojiPicker 
                     &&

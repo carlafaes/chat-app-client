@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { allUsersRoute } from '../utils/routes/APIRoutes';
 
+//styles
+import s from '../styles/contact.module.css';
+
 export default function Contact({ contacts, changeChat,currentUser }) {
     const [currentUserName, setCurrentUserName] = useState(undefined);
     const [currentUserImage, setCurrentUserImage] = useState(undefined);
@@ -43,26 +46,26 @@ export default function Contact({ contacts, changeChat,currentUser }) {
 
     return (
         <>
-            <h1 className="text-3xl font-bold ">Contact</h1>
+            <h1 className="text-center text-indigo-700">Contact</h1>
             {currentUserImage && (
-                <div p-6 max-w-sm mx-auto bg-white rounded-xl shadow-lg flex items-center space-x-4>
+                <div className="grid  gap-1 col-span-1 text-center bg-slate-900  p-4 max-w-sm mx-auto text-slate-400 rounded-xl shadow-lg space-x-2">
                     {contacts && contacts.map((contact, index) => {
                         return (
                             <div
                                 key={index}
-                                className={`contact ${index === currentSelected ? "selected" : ""}`}
+                                className={`contact ${index === currentSelected ? s.selected : s.chat }`}
                                 onClick={() => changeCurrentChat(index, contact)}
                             >
-                                <div>
+                                <div >
                                     <img
+                                    className="rounded-full h-12 w-12 shadow-lg"
                                         src={`data:image/svg+xml;base64,${contact.avatarImage}`}
                                         alt="avatar"
-                                        width='50'
-                                        height='50'
+                                        
                                     /> 
                                 </div>
                                 <div>
-                                    <h2>{contact.username}</h2>
+                                    <h3 className="text-indigo-400 break-all">{contact.username}</h3>
                                 </div>
                             </div>
                         )

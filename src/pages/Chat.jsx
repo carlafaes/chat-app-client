@@ -69,10 +69,10 @@ const handleChatChange=(currentChat)=>{
 }
 //console.log(currenChat,'chat')
     return(
-        <div>
-            <h1>Chat</h1>
+        <div className='container mx-auto grid bg-gray-800  px-2'>
+            <h1 className='text-center font-normal font-mono text-stone-400'>Chat</h1>
             <div className='grid grid-cols-1 md:grid-cols-2 gap-4 my-4'>
-            <div className='bg-violet-400'>      
+            <div className='bg-indigo-100 rounded-sm p-10'>      
             <Contact 
             contacts={contacts} 
             currentUser={currentUser}
