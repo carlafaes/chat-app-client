@@ -71,11 +71,17 @@ const handleChatChange=(currentChat)=>{
     return(
         <div>
             <h1>Chat</h1>
+            <div className='grid grid-cols-2'>
+            <div>      
             <Contact 
             contacts={contacts} 
             currentUser={currentUser}
             changeChat={handleChatChange}/>
+            </div>
+
+            <div>
             {currentChat === undefined ?
+            
             <Welcome 
             currentUser={currentUser}
             />
@@ -85,6 +91,8 @@ const handleChatChange=(currentChat)=>{
             socket={socket}
             />
             }
+            </div>
+            </div>
         </div>
     )
 }
